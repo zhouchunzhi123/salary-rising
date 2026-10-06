@@ -23,8 +23,7 @@ export function AppShell() {
       <header className="sticky top-0 z-30 border-b border-line/50 bg-bg/75 backdrop-blur-xl safe-top">
         <div className="mx-auto flex h-14 max-w-xl md:max-w-2xl lg:max-w-3xl items-center justify-between px-4">
           <Link to="/" className="flex items-center gap-2.5">
-            <img src="/logo.png" alt="工资跳动" className="h-8 w-8 rounded-xl shadow-glow" />
-            <span className="text-[15px] font-bold tracking-tight text-gradient-money font-display">工资跳动</span>
+            <span className="text-[17px] font-bold tracking-tight text-gradient-money font-display">工资跳动</span>
           </Link>
           <div className="relative">
             <button
