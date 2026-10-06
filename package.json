@@ -3,7 +3,7 @@
   "private": true,
   "version": "1.0.0",
   "type": "module",
-  "description": "我的工资在涨 —— 打工人实时赚钱仪表盘",
+  "description": "我的工资跳动 —— 打工人实时赚钱仪表盘",
   "scripts": {
     "dev": "vite",
     "build": "tsc --noEmit && vite build",
