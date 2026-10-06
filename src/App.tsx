@@ -11,7 +11,7 @@ import FullscreenPage from '@/pages/Fullscreen'
 export default function App() {
   return (
     <SettingsProvider>
-      <BrowserRouter>
+      <BrowserRouter basename={import.meta.env.BASE_URL}>
         <Routes>
           <Route element={<AppShell />}>
             <Route path="/" element={<Landing />} />

@@ -66,7 +66,7 @@ function drawCard(canvas: HTMLCanvasElement, data: ShareData) {
   // 顶部
   ctx.font = `700 64px ${FONT}`
   ctx.fillStyle = '#e03b78'
-  ctx.fillText('我的工资正在涨', W / 2, 220)
+  ctx.fillText('我的工资在跳动', W / 2, 220)
 
   ctx.font = `400 30px ${FONT}`
   ctx.fillStyle = '#9a6b7d'
@@ -120,7 +120,7 @@ function drawCard(canvas: HTMLCanvasElement, data: ShareData) {
 
   ctx.font = `400 26px ${FONT}`
   ctx.fillStyle = '#a07183'
-  ctx.fillText('我的工资在涨 · 打工人实时赚钱仪表盘', W / 2, 1290)
+  ctx.fillText('我的工资跳动 · 打工人实时赚钱仪表盘', W / 2, 1290)
 }
 
 export function ShareModal({ open, onClose, data }: ShareModalProps) {
@@ -157,7 +157,7 @@ export function ShareModal({ open, onClose, data }: ShareModalProps) {
           </p>
         </div>
         <div className="border-t border-line/60 p-4">
-          <a href={url} download="我的工资在涨.png" className="btn-primary w-full">
+          <a href={url} download="我的工资跳动.png" className="btn-primary w-full">
             <Download size={18} />
             保存分享图片
           </a>

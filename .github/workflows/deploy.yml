@@ -29,6 +29,8 @@ jobs:
           # GitHub Pages 部署在 /<repo-name>/ 子路径下
           VITE_BASE: /${{ github.event.repository.name }}/
         run: npm run build
+      - name: Add 404.html for SPA routing
+        run: cp dist/index.html dist/404.html
       - uses: actions/upload-pages-artifact@v3
         with:
           path: dist
