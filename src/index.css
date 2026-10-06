@@ -1,0 +1,356 @@
+@import '@fontsource/inter/400.css';
+@import '@fontsource/inter/500.css';
+@import '@fontsource/inter/600.css';
+@import '@fontsource/inter/700.css';
+@import '@fontsource/inter/800.css';
+@import '@fontsource/fraunces/500.css';
+@import '@fontsource/fraunces/600.css';
+@import '@fontsource/fraunces/700.css';
+@import '@fontsource/fraunces/800.css';
+@import '@fontsource/fraunces/900.css';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ============================================================
+   主题变量（HSL 三元组，Tailwind 通过 hsl(var(--c-*) / alpha) 引用）
+   ============================================================ */
+
+:root,
+[data-theme='pink'] {
+  --c-bg: 340 100% 98%;
+  --c-surface: 345 86% 95%;
+  --c-card: 0 0% 100%;
+  --c-ink: 335 42% 16%;
+  --c-sub: 335 14% 42%;
+  --c-faint: 335 10% 60%;
+  --c-line: 340 38% 90%;
+  --c-primary: 342 86% 60%;
+  --c-primary-deep: 342 82% 48%;
+  --c-primary-soft: 342 100% 95%;
+  --c-primary-contrast: 0 0% 100%;
+  --c-money: 348 82% 48%;
+  --c-success: 152 52% 38%;
+  --c-warning: 28 92% 50%;
+  --c-danger: 0 80% 58%;
+  --c-shadow: 340 45% 40%;
+  color-scheme: light;
+}
+
+[data-theme='light'] {
+  --c-bg: 40 30% 98%;
+  --c-surface: 40 22% 95%;
+  --c-card: 0 0% 100%;
+  --c-ink: 224 30% 12%;
+  --c-sub: 220 12% 38%;
+  --c-faint: 220 9% 57%;
+  --c-line: 222 16% 90%;
+  --c-primary: 243 70% 58%;
+  --c-primary-deep: 243 64% 46%;
+  --c-primary-soft: 243 80% 95%;
+  --c-primary-contrast: 0 0% 100%;
+  --c-money: 152 60% 32%;
+  --c-success: 152 58% 36%;
+  --c-warning: 32 90% 46%;
+  --c-danger: 0 76% 54%;
+  --c-shadow: 224 30% 28%;
+  color-scheme: light;
+}
+
+[data-theme='dark'] {
+  --c-bg: 242 28% 7%;
+  --c-surface: 240 22% 11%;
+  --c-card: 240 18% 13%;
+  --c-ink: 40 30% 96%;
+  --c-sub: 240 12% 66%;
+  --c-faint: 240 9% 50%;
+  --c-line: 240 14% 22%;
+  --c-primary: 342 88% 66%;
+  --c-primary-deep: 342 84% 54%;
+  --c-primary-soft: 342 42% 20%;
+  --c-primary-contrast: 0 0% 100%;
+  --c-money: 350 100% 72%;
+  --c-success: 152 55% 55%;
+  --c-warning: 35 95% 60%;
+  --c-danger: 0 85% 66%;
+  --c-shadow: 0 0% 0%;
+  color-scheme: dark;
+}
+
+[data-theme='mint'] {
+  --c-bg: 152 50% 97%;
+  --c-surface: 154 42% 93%;
+  --c-card: 0 0% 100%;
+  --c-ink: 162 38% 12%;
+  --c-sub: 160 14% 36%;
+  --c-faint: 160 10% 54%;
+  --c-line: 155 28% 86%;
+  --c-primary: 158 62% 36%;
+  --c-primary-deep: 158 64% 26%;
+  --c-primary-soft: 155 52% 90%;
+  --c-primary-contrast: 0 0% 100%;
+  --c-money: 152 64% 28%;
+  --c-success: 152 60% 34%;
+  --c-warning: 32 90% 46%;
+  --c-danger: 0 76% 54%;
+  --c-shadow: 160 40% 28%;
+  color-scheme: light;
+}
+
+[data-theme='cyber'] {
+  --c-bg: 231 48% 6%;
+  --c-surface: 236 42% 9%;
+  --c-card: 233 38% 11%;
+  --c-ink: 180 100% 92%;
+  --c-sub: 218 32% 68%;
+  --c-faint: 220 24% 50%;
+  --c-line: 188 80% 20%;
+  --c-primary: 315 100% 60%;
+  --c-primary-deep: 315 90% 48%;
+  --c-primary-soft: 315 65% 16%;
+  --c-primary-contrast: 0 0% 100%;
+  --c-money: 180 100% 52%;
+  --c-success: 130 90% 58%;
+  --c-warning: 40 100% 52%;
+  --c-danger: 0 100% 62%;
+  --c-shadow: 190 100% 22%;
+  color-scheme: dark;
+}
+
+[data-theme='system'] {
+  --c-bg: 40 30% 98%;
+  --c-surface: 40 22% 95%;
+  --c-card: 0 0% 100%;
+  --c-ink: 224 30% 12%;
+  --c-sub: 220 12% 38%;
+  --c-faint: 220 9% 57%;
+  --c-line: 222 16% 90%;
+  --c-primary: 243 70% 58%;
+  --c-primary-deep: 243 64% 46%;
+  --c-primary-soft: 243 80% 95%;
+  --c-primary-contrast: 0 0% 100%;
+  --c-money: 152 60% 32%;
+  --c-success: 152 58% 36%;
+  --c-warning: 32 90% 46%;
+  --c-danger: 0 76% 54%;
+  --c-shadow: 224 30% 28%;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  [data-theme='system'] {
+    --c-bg: 242 28% 7%;
+    --c-surface: 240 22% 11%;
+    --c-card: 240 18% 13%;
+    --c-ink: 40 30% 96%;
+    --c-sub: 240 12% 66%;
+    --c-faint: 240 9% 50%;
+    --c-line: 240 14% 22%;
+    --c-primary: 342 88% 66%;
+    --c-primary-deep: 342 84% 54%;
+    --c-primary-soft: 342 42% 20%;
+    --c-primary-contrast: 0 0% 100%;
+    --c-money: 350 100% 72%;
+    --c-success: 152 55% 55%;
+    --c-warning: 35 95% 60%;
+    --c-danger: 0 85% 66%;
+    --c-shadow: 0 0% 0%;
+    color-scheme: dark;
+  }
+}
+
+/* ============================================================
+   基础样式
+   ============================================================ */
+
+@layer base {
+  html {
+    -webkit-tap-highlight-color: transparent;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    @apply bg-bg text-ink font-sans antialiased;
+    min-height: 100dvh;
+    background-image:
+      radial-gradient(60rem 40rem at 110% -10%, hsl(var(--c-primary) / 0.12), transparent 60%),
+      radial-gradient(50rem 36rem at -20% 110%, hsl(var(--c-primary) / 0.08), transparent 55%);
+    background-attachment: fixed;
+    overscroll-behavior-y: none;
+  }
+
+  [data-theme='cyber'] body {
+    background-image:
+      radial-gradient(60rem 40rem at 110% -10%, hsl(315 100% 55% / 0.16), transparent 60%),
+      radial-gradient(50rem 36rem at -20% 110%, hsl(180 100% 45% / 0.1), transparent 55%);
+  }
+
+  *:focus-visible {
+    outline: 2px solid hsl(var(--c-primary) / 0.6);
+    outline-offset: 2px;
+    border-radius: 0.5rem;
+  }
+
+  button {
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  input,
+  select,
+  button {
+    font: inherit;
+  }
+}
+
+@layer components {
+  /* ---------- 卡片 ---------- */
+  .card {
+    @apply rounded-3xl border bg-card;
+    border-color: hsl(var(--c-line) / 0.6);
+    box-shadow:
+      0 1px 2px hsl(var(--c-shadow) / 0.04),
+      0 8px 24px -12px hsl(var(--c-shadow) / 0.14);
+    background-clip: padding-box;
+  }
+
+  /* ---------- 按钮 ---------- */
+  .btn {
+    @apply inline-flex select-none items-center justify-center gap-2 rounded-2xl px-5 py-3
+      text-sm font-semibold transition-all duration-200 active:scale-[0.97]
+      disabled:pointer-events-none disabled:opacity-45;
+  }
+
+  .btn-primary {
+    @apply btn text-primary-contrast;
+    background-image: linear-gradient(
+      135deg,
+      hsl(var(--c-primary)) 0%,
+      hsl(var(--c-primary-deep)) 100%
+    );
+    box-shadow:
+      0 6px 16px -6px hsl(var(--c-primary) / 0.55),
+      inset 0 1px 0 hsl(0 0% 100% / 0.25);
+  }
+  .btn-primary:hover {
+    filter: brightness(1.06);
+    box-shadow:
+      0 10px 24px -8px hsl(var(--c-primary) / 0.6),
+      inset 0 1px 0 hsl(0 0% 100% / 0.25);
+  }
+  .btn-primary:active {
+    filter: brightness(0.96);
+  }
+
+  .btn-ghost {
+    @apply btn border bg-card/70 text-ink hover:bg-surface;
+    border-color: hsl(var(--c-line) / 0.8);
+  }
+
+  .btn-soft {
+    @apply btn bg-primary-soft text-primary;
+  }
+  .btn-soft:hover {
+    background-color: hsl(var(--c-primary) / 0.16);
+  }
+
+  /* ---------- 输入 ---------- */
+  .input {
+    @apply w-full rounded-2xl border bg-card px-4 py-3 text-ink
+      placeholder:text-faint outline-none transition-all duration-200;
+    border-color: hsl(var(--c-line) / 0.8);
+  }
+  .input:focus {
+    border-color: hsl(var(--c-primary) / 0.55);
+    box-shadow: 0 0 0 4px hsl(var(--c-primary) / 0.1);
+  }
+
+  .chip {
+    @apply inline-flex items-center gap-1.5 rounded-full border bg-card/80 px-3 py-1.5 text-xs font-medium text-sub;
+    border-color: hsl(var(--c-line) / 0.7);
+  }
+
+  /* ---------- 状态徽标 ---------- */
+  .badge {
+    @apply inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 text-xs font-semibold;
+  }
+  .badge-dot {
+    @apply inline-block h-1.5 w-1.5 rounded-full;
+  }
+  .badge-success {
+    background-color: hsl(var(--c-success) / 0.1);
+    color: hsl(var(--c-success));
+  }
+  .badge-success .badge-dot {
+    background-color: hsl(var(--c-success));
+  }
+  .badge-warning {
+    background-color: hsl(var(--c-warning) / 0.12);
+    color: hsl(var(--c-warning));
+  }
+  .badge-warning .badge-dot {
+    background-color: hsl(var(--c-warning));
+  }
+  .badge-danger {
+    background-color: hsl(var(--c-danger) / 0.1);
+    color: hsl(var(--c-danger));
+  }
+  .badge-danger .badge-dot {
+    background-color: hsl(var(--c-danger));
+  }
+  .badge-primary {
+    background-color: hsl(var(--c-primary) / 0.1);
+    color: hsl(var(--c-primary));
+  }
+  .badge-primary .badge-dot {
+    background-color: hsl(var(--c-primary));
+  }
+}
+
+@layer utilities {
+  .tnum {
+    font-variant-numeric: tabular-nums;
+    font-feature-settings: 'tnum';
+  }
+
+  /* 金额专用：衬线字体，营造庄重的"钱在增长"质感 */
+  .font-display {
+    font-family: 'Fraunces', 'Songti SC', 'STSong', Georgia, serif;
+    font-optical-sizing: auto;
+  }
+
+  .text-gradient-money {
+    background-image: linear-gradient(
+      125deg,
+      hsl(var(--c-money)) 0%,
+      hsl(var(--c-primary)) 100%
+    );
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .safe-bottom {
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+  .safe-top {
+    padding-top: env(safe-area-inset-top);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
