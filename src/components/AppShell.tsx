@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { Link, Outlet, useLocation } from 'react-router-dom'
-import { BarChart3, Briefcase, Palette, PiggyBank, Settings as SettingsIcon, TrendingUp } from 'lucide-react'
+import { BarChart3, Palette, PiggyBank, Settings as SettingsIcon, TrendingUp } from 'lucide-react'
 import { useSettings } from '@/hooks/useSettings'
 import { useTheme, THEME_OPTIONS } from '@/hooks/useTheme'
 import { cn } from '@/utils/cn'
@@ -21,12 +21,10 @@ export function AppShell() {
   return (
     <div className="min-h-dvh">
       <header className="sticky top-0 z-30 border-b border-line/50 bg-bg/75 backdrop-blur-xl safe-top">
-        <div className="mx-auto flex h-14 max-w-xl items-center justify-between px-4">
+        <div className="mx-auto flex h-14 max-w-xl md:max-w-2xl lg:max-w-3xl items-center justify-between px-4">
           <Link to="/" className="flex items-center gap-2.5">
-            <span className="grid h-8 w-8 place-items-center rounded-xl bg-primary shadow-glow">
-              <Briefcase size={16} className="text-primary-contrast" strokeWidth={2.4} />
-            </span>
-            <span className="text-[15px] font-bold tracking-tight text-ink">工资在涨</span>
+            <img src="/logo.png" alt="工资跳动" className="h-8 w-8 rounded-xl shadow-glow" />
+            <span className="text-[15px] font-bold tracking-tight text-gradient-money font-display">工资跳动</span>
           </Link>
           <div className="relative">
             <button
@@ -74,12 +72,12 @@ export function AppShell() {
         </div>
       </header>
 
-      <main className="mx-auto w-full max-w-xl px-4 pb-28 pt-5">
+      <main className="mx-auto w-full max-w-xl md:max-w-2xl lg:max-w-3xl px-4 pb-28 pt-5">
         <Outlet />
       </main>
 
       <nav className="fixed inset-x-0 bottom-0 z-30 border-t border-line/50 bg-card/90 backdrop-blur-xl safe-bottom">
-        <div className="mx-auto grid max-w-xl grid-cols-4">
+        <div className="mx-auto grid max-w-xl md:max-w-2xl lg:max-w-3xl grid-cols-4">
           {NAV_ITEMS.map((item) => {
             const active = location.pathname.startsWith(item.to)
             const Icon = item.icon
