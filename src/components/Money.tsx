@@ -29,8 +29,8 @@ export function Money({ value, decimals, className = '', prefix }: MoneyProps) {
       className={`tnum font-display font-extrabold tracking-tight text-gradient-money ${className}`}
       aria-label={`${symbol}${formatMoney(safe, decimals)}`}
     >
-      <span className="mr-[0.06em] align-baseline font-semibold">{symbol}</span>
-      <span className="inline-block">{formatMoney(safe, decimals)}</span>
+      {symbol}
+      {formatMoney(safe, decimals)}
     </span>
   )
 }
