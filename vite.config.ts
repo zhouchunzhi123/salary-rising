@@ -18,8 +18,8 @@ export default defineConfig({
       registerType: 'autoUpdate',
       includeAssets: ['favicon.svg', 'icon.svg'],
       manifest: {
-        name: '我的工资在涨',
-        short_name: '工资在涨',
+        name: '我的工资跳动',
+        short_name: '工资跳动',
         description: '虽然老板不会主动给你加工资，但至少这里的数字一直在涨。',
         lang: 'zh-CN',
         start_url: base,
