@@ -1,6 +1,6 @@
 import { useMemo, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { AlertCircle, ChevronRight, PiggyBank } from 'lucide-react'
+import { AlertCircle, ChevronRight, Monitor, PiggyBank } from 'lucide-react'
 import type { Currency, SalaryType, WorkSchedule } from '@/types'
 import { useSettings } from '@/hooks/useSettings'
 import { SegmentedControl } from '@/components/form/SegmentedControl'
@@ -13,6 +13,7 @@ import { sanitizeMoneyInput } from '@/utils/input'
 import { dateKey } from '@/utils/time'
 import { formatMoney } from '@/utils/format'
 import { cn } from '@/utils/cn'
+import { isTauri, toggleWidgetWindow, enableAutostart, disableAutostart, isAutostartEnabled } from '@/utils/tauri'
 
 const SALARY_OPTIONS: { value: SalaryType; label: string }[] = [
   { value: 'monthly', label: '月薪' },
@@ -43,7 +44,16 @@ export default function SettingsPage() {
   const [savingsGoalText, setSavingsGoalText] = useState(
     settings.savings.goal > 0 ? String(settings.savings.goal) : '',
   )
+  const [autostartEnabled, setAutostartEnabled] = useState(false)
+  const [widgetError, setWidgetError] = useState<string | null>(null)
   const [errors, setErrors] = useState<string[]>([])
+
+  // 读取开机启动状态（仅在 Tauri 环境）
+  useMemo(() => {
+    if (isTauri) {
+      isAutostartEnabled().then(setAutostartEnabled).catch(() => {})
+    }
+  }, [])
 
   const patchSched = (patch: Partial<WorkSchedule>) =>
     setSched((prev) => ({ ...prev, ...patch }))
@@ -312,6 +322,56 @@ export default function SettingsPage() {
         )}
       </section>
 
+      {/* Windows 桌面小组件 */}
+      {isTauri && (
+        <section className="card space-y-4 p-5">
+          <div className="flex items-center gap-2 text-sm font-bold text-ink">
+            <span className="grid h-6 w-6 place-items-center rounded-full bg-primary text-xs font-bold text-primary-contrast">5</span>
+            <Monitor size={16} className="text-primary" />
+            Windows 桌面小组件
+          </div>
+          <p className="text-xs text-faint">
+            把实时工资显示变成一个桌面悬浮小窗口，长期放在屏幕边缘，随时看到自己的工资在涨。
+          </p>
+          <button
+            type="button"
+            onClick={async () => {
+              setWidgetError(null)
+              try {
+                await toggleWidgetWindow()
+              } catch (e) {
+                setWidgetError(e instanceof Error ? e.message : String(e))
+              }
+            }}
+            className="btn-soft w-full py-3 text-sm"
+          >
+            <Monitor size={16} />
+            打开桌面小组件
+          </button>
+          {widgetError && (
+            <div className="flex items-start gap-2 rounded-xl bg-danger/5 px-3 py-2 text-xs text-danger">
+              <AlertCircle size={14} className="mt-0.5 shrink-0" />
+              <span>{widgetError}</span>
+            </div>
+          )}
+          <div className="flex items-center justify-between rounded-2xl bg-surface px-4 py-3">
+            <div>
+              <div className="text-sm font-semibold">开机自动启动</div>
+              <div className="text-[11px] text-faint">Windows 启动时自动运行</div>
+            </div>
+            <Toggle
+              checked={autostartEnabled}
+              onChange={(v) => {
+                setAutostartEnabled(v)
+                if (v) enableAutostart().catch(() => {})
+                else disableAutostart().catch(() => {})
+              }}
+              label="开机自动启动"
+            />
+          </div>
+        </section>
+      )}
+
       {/* 错误提示 */}
       {errors.length > 0 && (
         <div id="settings-errors" className="card space-y-2 border-danger/30 bg-danger/5 p-4">
@@ -347,6 +407,24 @@ export default function SettingsPage() {
         开始赚钱
         <ChevronRight size={19} />
       </button>
+
+      {/* 联系作者 */}
+      <section className="card p-5 text-center">
+        <div className="text-sm font-bold text-ink">联系作者</div>
+        <p className="mt-1 text-xs text-faint">
+          使用中遇到问题、有新想法或建议，欢迎扫码加我微信
+        </p>
+        <img
+          src={`${import.meta.env.BASE_URL}wechat-qr.jpg`}
+          alt="作者微信二维码"
+          className="mx-auto mt-4 w-48 max-w-full rounded-2xl border border-line/70"
+          loading="lazy"
+        />
+        <div className="mt-3 text-xs font-semibold text-sub">微信：夏天</div>
+        <p className="mt-1 text-[11px] text-faint">
+          备注「工资跳动」，我会尽快回复你
+        </p>
+      </section>
     </div>
   )
 }

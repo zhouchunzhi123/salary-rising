@@ -1,9 +1,10 @@
 import { useRef } from 'react'
 import { Link } from 'react-router-dom'
-import { ArrowRight, BarChart3, WifiOff } from 'lucide-react'
+import { ArrowRight, BarChart3, Download, WifiOff } from 'lucide-react'
 import { Money } from '@/components/Money'
 import { useSettings } from '@/hooks/useSettings'
 import { useRafNow } from '@/hooks/useRafNow'
+import { isTauri } from '@/utils/tauri'
 import { currencySymbol } from '@/utils/currencies'
 import { formatMoney } from '@/utils/format'
 
@@ -66,6 +67,25 @@ export default function Landing() {
         {settings.onboarded ? '继续赚钱' : '开始赚钱'}
         <ArrowRight size={19} strokeWidth={2.4} />
       </Link>
+
+      {!isTauri && (
+        <Link
+          to="/download"
+          className="animate-fade-up mt-3 flex w-full max-w-sm items-center justify-between rounded-2xl border border-line/70 bg-card/80 px-4 py-3 text-left backdrop-blur transition-all hover:border-primary/50 hover:shadow-soft"
+          style={{ animationDelay: '0.2s' }}
+        >
+          <div className="flex items-center gap-3">
+            <span className="grid h-10 w-10 place-items-center rounded-xl bg-primary-soft text-primary">
+              <Download size={18} />
+            </span>
+            <div>
+              <div className="text-sm font-bold text-ink">下载 Windows 桌面版</div>
+              <div className="text-[11px] text-faint">桌面悬浮工资小组件 · 离线可用</div>
+            </div>
+          </div>
+          <ArrowRight size={16} className="shrink-0 text-faint" />
+        </Link>
+      )}
 
       <div
         className="animate-fade-up mt-6 flex flex-wrap items-center justify-center gap-2 text-[11px] text-faint"
