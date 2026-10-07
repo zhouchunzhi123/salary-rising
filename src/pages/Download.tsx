@@ -13,7 +13,7 @@ import {
   Info,
 } from 'lucide-react'
 
-const EXE_URL = `${import.meta.env.BASE_URL}download/SalaryRising-Setup-0.1.0.exe`
+const EXE_URL = `${import.meta.env.BASE_URL}dl/SalaryRising-Setup-0.1.0.exe`
 
 const STEPS = [
   {
